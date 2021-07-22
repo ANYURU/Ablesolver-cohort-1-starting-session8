@@ -41,6 +41,7 @@ if (MESSAGE_ELEMENT != null) {
         }
     })
 }
+
 // Remove this peace of code after unit testing  
 // module.exports = {
 //     notify,
