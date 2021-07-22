@@ -4,8 +4,7 @@
   "description": "About Events and Forms ",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
-    
+    "test": "jest"  
   },
   "author": "davie",
   "license": "ISC",
