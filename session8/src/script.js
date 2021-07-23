@@ -1,4 +1,4 @@
-
+ 
 //Events
 let notify = () => {
     return 'Invent executed'
@@ -8,7 +8,7 @@ let validateInput = (input) => {
 
     let value
     
-    const ALLOWED_TYPES = ['string', 'number'] // Specify the acceptable data type of the input
+    const ALLOWED_TYPES = ['string', 'number'] //Specify the acceptable data type of the input
     
     if( ! ALLOWED_TYPES.includes( typeof input ) ) // Compare the typeof input with the acceptable data types.
         value = input.target.value
@@ -41,9 +41,8 @@ if (MESSAGE_ELEMENT != null) {
         }
     })
 }
-
 // Remove this peace of code after unit testing  
-// module.exports = {
-//     notify,
-//     pickInfo
-// }
+module.exports = {
+    notify,
+    validateInput
+}

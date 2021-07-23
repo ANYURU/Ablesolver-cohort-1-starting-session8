@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+*/
+// import scripts from '../src/script'
 const { notify, validateInput } = require('../src/script')
 
 test('Must be a function', () => {
@@ -7,7 +11,7 @@ test('Must be a function', () => {
     expect(typeof result === 'string').toBe(true)
 })
 
-describe('Picking input', () => {
+describe('Input validation', () => {
     test("validateInput Must be a function", () => {
         expect(typeof validateInput === 'function').toBeTruthy()
     });
