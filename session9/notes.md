@@ -16,3 +16,6 @@ HTTP VERBS/ methods: Represent the different actions to be performed in the syst
 - **PATCH** -> Perform multiple updates in the API
 
 Read more here: https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
+
+
+There are various types of APIs but the commonly used are REST APIs and GRAPHQL APIs
