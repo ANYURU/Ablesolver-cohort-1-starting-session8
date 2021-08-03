@@ -1,13 +1,15 @@
 // const TABLE_DATA = document.getElementById('table-data')
 const TABLE_DATA = document.querySelector('#table-data')
 const PAGINATION = document.querySelector('#pagination')
+const PER_PAGE = document.querySelector('#per_page')
 let generatedTableRows = ''
 
 document.body.addEventListener('click', (event) => { //Event delegation
   // console.log(event.target.dataset.page)
   if (event.target.dataset.page) {
     let { page } = event.target.dataset;
-    retrieveWithPagination(page)
+    let per_page = 10
+    retrieveWithPagination(page, per_page)
     // console.log(page);
   }
 })
@@ -18,8 +20,8 @@ document.body.addEventListener('click', (event) => { //Event delegation
 */
 let todos = []
 
-let retrieveWithPagination = (page = 1) => {
-  let buttons = "";
+let retrieveWithPagination = (page = 1, numberOfItemsPerPage = 10) => {
+  let buttons = "", generatedTableRows;
 
   fetch("https://jsonplaceholder.typicode.com/todos") // Retrieve todos
     .then((response) => response.json())
@@ -27,14 +29,14 @@ let retrieveWithPagination = (page = 1) => {
 
       // console.log(json.length)
       // Generate pagination
-      let numberOfItemsPerPage = 10;
+      // let numberOfItemsPerPage = 10;
       const MAX_PAGES = Math.floor(json.length / numberOfItemsPerPage);
-      let index = page;
-    
-      todos = json.slice(index - 1, numberOfItemsPerPage);
+      const START_POSITION = (page -1) * numberOfItemsPerPage ;
+      todos = json.slice(START_POSITION).slice(0, numberOfItemsPerPage);
+      
       let i = 1;
 
-      while (i < MAX_PAGES) {
+      while (i <= MAX_PAGES) {
         //Generate buttons
         buttons += `<button data-page="${i}" >${i}</button>`
         i++;
@@ -51,6 +53,7 @@ let retrieveWithPagination = (page = 1) => {
            * todo = { 'userId': 1, 'id': 1, 'title': 'title', 'complete': false }
            */
           let { id, userId, title, completed } = todo;
+
 
           fetch(`https://jsonplaceholder.typicode.com/users/${userId}`) //Retrieve the name of the user who owns the todo item.
             .then((response) => response.json()) // Convert response to json
