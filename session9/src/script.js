@@ -1,23 +1,24 @@
 // const TABLE_DATA = document.getElementById('table-data')
 const TABLE_DATA = document.querySelector('#table-data')
 const PAGINATION = document.querySelector('#pagination')
-let PER_PAGE = document.querySelector('#per_page')
-
+let PER_PAGE = document.querySelector("#per_page");
 
 let per_page = parseInt(PER_PAGE.value) || 10;
 
 PER_PAGE.onblur = () => {
   per_page = parseInt(PER_PAGE.value);
-  retrieveWithPagination(1, per_page)
+  retrieveWithPagination(1, per_page);
 }
 
-document.body.onclick = (event) => { //Event delegation
+document.body.onclick = (event) => { 
+// document.body.addEventListener('click', (event) => { //Event delegation
   // console.log(event.target.dataset.page)
   if (event.target.dataset.page) {
     let { page } = event.target.dataset;
-    let per_page = parseInt(document.querySelector("#per_page").value) || per_page;
+    per_page = parseInt(document.querySelector("#per_page").value) || per_page;
+    // let per_page = 
     // console.log(typeof per_page)
-    retrieveWithPagination(page, per_page)
+    retrieveWithPagination(page, per_page )
     // console.log(page);
   }
 }//)
@@ -29,8 +30,8 @@ document.body.onclick = (event) => { //Event delegation
 let todos = []
 
 let retrieveWithPagination = (page = 1, numberOfItemsPerPage = 10) => {
-  let buttons = "", generatedTableRows;
-
+  let buttons = "", generatedTableRows = "";
+  
   fetch("https://jsonplaceholder.typicode.com/todos") // Retrieve todos
     .then((response) => response.json())
     .then((json) => {
@@ -39,9 +40,10 @@ let retrieveWithPagination = (page = 1, numberOfItemsPerPage = 10) => {
       // Generate pagination
       // let numberOfItemsPerPage = 10;
       const MAX_PAGES = Math.floor(json.length / numberOfItemsPerPage);
-      const START_POSITION = (page -1) * numberOfItemsPerPage ;
+
+      const START_POSITION = (page - 1) * numberOfItemsPerPage;
       todos = json.slice(START_POSITION).slice(0, numberOfItemsPerPage);
-      
+
       let i = 1;
 
       while (i <= MAX_PAGES) {
@@ -49,8 +51,9 @@ let retrieveWithPagination = (page = 1, numberOfItemsPerPage = 10) => {
         buttons += `<button data-page="${i}" >${i}</button>`
         i++;
       }
-    }).then(() => {
 
+    }).then(() => {
+      // console.log(todos)
       if (todos && todos.length > 0) {
         // Check whether there are some todos
 
@@ -61,7 +64,6 @@ let retrieveWithPagination = (page = 1, numberOfItemsPerPage = 10) => {
            * todo = { 'userId': 1, 'id': 1, 'title': 'title', 'complete': false }
            */
           let { id, userId, title, completed } = todo;
-
 
           fetch(`https://jsonplaceholder.typicode.com/users/${userId}`) //Retrieve the name of the user who owns the todo item.
             .then((response) => response.json()) // Convert response to json
@@ -89,3 +91,76 @@ let retrieveWithPagination = (page = 1, numberOfItemsPerPage = 10) => {
 }
 
 retrieveWithPagination()
+
+const TODO_FORM = document.querySelector('form#new-todo')
+
+if (TODO_FORM != 'undefined') {
+  let title = ''
+  TODO_FORM.addEventListener('submit', event => {
+    event.preventDefault()
+
+    title = event.target[0].value;
+
+    if (!validate(title)) {
+      // alert('Check details. Todo not added!')
+      return
+    }
+
+    sendTodoToAPI(title)
+
+  })
+}
+
+let sendTodoToAPI = (title) => {
+  // console.log(title);
+  fetch("https://jsonplaceholder.typicode.com/todos", {
+    method: "POST",
+    body: JSON.stringify({
+      title,
+      userId: 1,
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  })
+    .then(response => response.json())
+    .then(json => {
+      let { id } = json
+      if (id) {
+        TODO_FORM.reset()
+        // TODO_FORM.classList.add('was-validated')
+        document.getElementById('todo-id').innerText = id
+        // document.getElementById('title').value = ''
+        document.getElementById('todo-alert').classList.remove('d-none').add('d-block')
+      }
+      // console.log(json)
+    })
+    .catch( error => console.log(error));
+};
+
+function validate(title) {
+  return (title == 'undefined' ||  title.length < 3 ) ? false : true
+}
+
+(() => {
+  "use strict";
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const FORMS = document.querySelectorAll(".needs-validation");
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(FORMS).forEach((FORM) =>{
+    FORM.addEventListener(
+      "submit",
+      (event) => {
+        if (!FORM.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+
+        FORM.classList.add("was-validated");
+      },
+      false
+    );
+  });
+})();
