@@ -77,6 +77,12 @@ let retrieveWithPagination = (page = 1, numberOfItemsPerPage = 10) => {
                     <td>${name}</td>
                     <td>${title}</td>
                     <td>${completed ? "Completed" : "Incomplete"}</td>
+                    <td>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                      <button onClick="todoDelete(${id})" type="button" class="btn btn-danger">Delete</button>
+                      <button onClick="todoDelete(${id})" type="button" class="btn btn-success">Edit</button>
+                    </div>
+                    </td>
                 </tr>`; //Explain this block of code
             })
             .then(() => {
@@ -137,6 +143,24 @@ let sendTodoToAPI = (title) => {
     })
     .catch( error => console.log(error));
 };
+
+let todoEdit = todoID => {
+  console.log(todoID)
+}
+
+let todoDelete = todoID => {
+  // console.log(todoID)
+  let confirmation = confirm(`Are you sure you want to delete item ${todoID}?`)
+  if (!confirmation) return 
+
+  fetch(`https://jsonplaceholder.typicode.com/todos/${todoID}`, {
+    method: "DELETE",
+  })
+  .then((response) => response.json())
+  .then((json) => retrieveWithPagination())
+  .catch((error) => console.log(error))
+}
+
 
 function validate(title) {
   return (title == 'undefined' ||  title.length < 3 ) ? false : true
