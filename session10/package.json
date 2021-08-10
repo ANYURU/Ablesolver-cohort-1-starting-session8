@@ -1,0 +1,14 @@
+{
+  "name": "session10",
+  "version": "1.0.0",
+  "description": "Node",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "David Anyuru",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0"
+  }
+}
