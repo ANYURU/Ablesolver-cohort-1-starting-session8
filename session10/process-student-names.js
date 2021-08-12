@@ -13,13 +13,22 @@ const SERVER = HTTP.createServer((request, response) => {
     response.statusCode = 200
     response.setHeader('Content-type', 'text/html')
     
-    const { argv } = process
+    let { argv } = process;
+    let args = require('minimist')(argv.slice(2)) // You need to use require the minimist package to be able to access name arguments
+    // To name the argument you pass it like
+    // node filename --key=value
+    // console.log(argv)
+
     let html = ''
-    if(argv.length > 0) {
-        argv.forEach((name) => {
-            html += `<p>${ name }<\p>`
-        })
-    }
+    html = args['school']  
+    html += `</br>` + args['course']
+    // let html = ''
+    // if(argv.length > 0) {
+    //     argv.forEach((name) => {
+    //         html += `<p>${ name }<\p>`
+    //     })
+    // }
+    
     response.end(`<p>Server running</p> ${html}`)
 })
 
