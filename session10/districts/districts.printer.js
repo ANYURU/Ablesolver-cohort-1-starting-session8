@@ -5,10 +5,10 @@ const DISTRICTS = require('./uganda.districts')
 //Each question is an object literal {} not an object instance
 const QUESTIONS = [
     {
-        type:'list',
-        name:'response',
-        message:'Do you want to see the districts of Uganda',
-        choices: ['Yes', 'No'] 
+        type:`list`,
+        name:`response`,
+        message:`Do you want to see the districts of Uganda`,
+        choices: [`Yes`, `No`] 
     }
 ]
 
@@ -17,12 +17,12 @@ INQUIRER.prompt(QUESTIONS).then(answer => {
     // console.log(answer.response)
     let { response } = answer
 
-    if (response == 'Yes') {
+    if (response == `Yes`) {
         if(DISTRICTS.length > 0) {
-            console.log(DISTRICTS.join("\n")) 
+            console.log(DISTRICTS.join(`\n`)) 
         }       
     } 
     else {
-        console.log(`Okay, Goodbye! `)
+        console.log(`Okay!, Goodbye`)
     }
 })
