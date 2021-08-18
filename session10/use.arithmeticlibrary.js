@@ -13,6 +13,9 @@ console.log(CUSTOMMATH.subtract(2,5))
 // Multiply numbers [2,2,2]
 console.log(CUSTOMMATH.product([2,2,2]))
 
+//Divide numbers 4/2
+console.log(CUSTOMMATH.division(4,2))
+
 // Log to the console the title of the second export
 console.log(SM.title)
 

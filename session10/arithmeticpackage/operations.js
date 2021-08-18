@@ -7,7 +7,11 @@ exports.CUSTOMMATH = {
     // }
     product: (numbers = []) => 
         numbers.reduce((accumulator, currentValue) =>
-        accumulator * currentValue)
+        accumulator * currentValue),
+
+    division: function (num1, num2) {
+        return num1/num2
+    } 
 
 }
 
