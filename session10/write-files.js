@@ -39,7 +39,9 @@ try {
     fs.writeFileSync(filePath, content2, {flag:'a'})
     //file written successfully
     console.log(`Voila!\n You've written to the file.`)
-    
+
 } catch (err) {
     console.error(err);
 }
+
+//Challenge: Use the fs.appendFile and fs.appendFileSync to practice appending to file.
