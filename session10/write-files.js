@@ -45,3 +45,22 @@ try {
 }
 
 //Challenge: Use the fs.appendFile and fs.appendFileSync to practice appending to file.
+let content3 = `\n This text has been appended to the text file using appendFile() API.\n`
+
+fs.appendFile(filePath, content3, err => {
+    if( err ) {
+        console.log(err)
+        return
+    }
+    console.log(`Hola! \nThe content has been appended to the file.`)
+})
+
+let content4 = `Text appended using the appendFileSync() API`
+try {
+    fs.appendFileSync(filePath, content4)
+    //On success
+    console.log(`Wunderbar! \nThe content has been appended to the file.`)
+
+} catch ( err ) {
+    console.error(err)
+} 
