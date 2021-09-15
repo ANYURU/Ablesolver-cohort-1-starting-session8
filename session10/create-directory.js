@@ -3,7 +3,7 @@ const path = require('path')
 
 const folderName = 'test'
 const folderName2 = path.resolve('test2')
-console.log(folderName2)
+// console.log(folderName2)
 
 
 try {
