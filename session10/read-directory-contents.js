@@ -19,6 +19,7 @@ try {
         return path.join(folderPath, fileName)
     })
     console.log(dirContents)
+
 } catch (err) {
     console.error(err)
 }
