@@ -31,5 +31,12 @@ file-path-2.js
 managing-directories.js
 test1.txt
 test2.txt
-write-files.js 
+write-files.js
+create-directory.js
+read-directory-contents.js
+return-files-only.js
+test
+images
+test2
+
 
