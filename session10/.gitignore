@@ -38,5 +38,7 @@ return-files-only.js
 test
 images
 test2
+remove-delete-directories.js
+rename-directories.js
 
 
