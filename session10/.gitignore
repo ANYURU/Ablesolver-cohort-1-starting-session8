@@ -40,5 +40,7 @@ images
 test2
 remove-delete-directories.js
 rename-directories.js
+os-management.js
+events-handling.js
 
 
