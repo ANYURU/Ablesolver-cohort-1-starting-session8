@@ -42,5 +42,8 @@ remove-delete-directories.js
 rename-directories.js
 os-management.js
 events-handling.js
+http-modules.js
+using-buffers.js
+
 
 
